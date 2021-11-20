@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 
 class ImageDetails extends StatefulWidget{
@@ -18,13 +19,21 @@ class _ImageDetailsState extends State<ImageDetails> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
-      child: InteractiveViewer(
-          panEnabled: true,
-          scaleEnabled: true,
-          minScale: 1.0,
-          maxScale: 10,
-          child: Image.network(imageUrl)
-      ),
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InteractiveViewer(
+                panEnabled: true,
+                scaleEnabled: true,
+                minScale: 1.0,
+                maxScale: 10,
+                child: Image.network(imageUrl)
+            ),
+            ElevatedButton(
+              child: Text('Share'),
+              onPressed: () => Share.share("Sharing image link: "+imageUrl),
+            )
+          ])
     );
   }
 }
